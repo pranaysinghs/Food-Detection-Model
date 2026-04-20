@@ -30,7 +30,7 @@ with st.sidebar:
     else:
         st.success("API Key is securely loaded from server!")
         
-    st.info("Powered by Groq's insanely fast Llama 3.2 Vision model.")
+    st.info("Powered by Groq's insanely fast Llama 4 Scout Vision model.")
 
 def get_calorie_estimate(base64_image, api_key):
     """Sends the image to Groq's Vision API and requests a markdown table format."""
@@ -48,7 +48,7 @@ def get_calorie_estimate(base64_image, api_key):
     """
     
     response = client.chat.completions.create(
-        model="llama-3.2-11b-vision-preview",
+        model="meta-llama/llama-4-scout-17b-16e-instruct",  # Updated model
         messages=[
             {
                 "role": "user",
