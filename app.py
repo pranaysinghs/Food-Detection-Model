@@ -29,8 +29,6 @@ with st.sidebar:
             api_key = user_api_key
     else:
         st.success("API Key is securely loaded from server!")
-        
-    st.info("Powered by Groq's insanely fast Llama 4 Scout Vision model.")
 
 def get_calorie_estimate(base64_image, api_key):
     """Sends the image to Groq's Vision API and requests a markdown table format."""
@@ -48,7 +46,7 @@ def get_calorie_estimate(base64_image, api_key):
     """
     
     response = client.chat.completions.create(
-        model="meta-llama/llama-4-scout-17b-16e-instruct",  # Updated model
+        model="meta-llama/llama-4-scout-17b-16e-instruct",
         messages=[
             {
                 "role": "user",
@@ -72,8 +70,10 @@ def get_calorie_estimate(base64_image, api_key):
 uploaded_file = st.file_uploader("Upload an image of your food", type=["jpg", "jpeg", "png"])
 
 if uploaded_file is not None:
-    # Display the uploaded image
-    st.image(uploaded_file, caption="Uploaded Food Image", use_container_width=True)
+    # Display the uploaded image in small size using columns
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        st.image(uploaded_file, caption="Uploaded Food Image", width=250)
     
     if st.button("Analyze Food 🔍"):
         if not api_key or api_key == "your_api_key_here":
